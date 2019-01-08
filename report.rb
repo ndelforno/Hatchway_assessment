@@ -43,3 +43,14 @@ puts '---------'
 p courses_array
 puts '---------'
 p tests_array
+
+students_array.each do |student|
+
+  print "student Id: #{student[:id]}, name: #{student[:name]}\n"
+  print "total Average: \n"
+
+  courses_array.each do |course|
+    print "Course: #{course[:name]}, Teacher: #{course[:teacher]}\n"
+  end
+  puts "--------"
+end
