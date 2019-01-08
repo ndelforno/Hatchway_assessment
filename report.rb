@@ -1,5 +1,7 @@
 require 'csv'
 require 'json'
+require "awesome_print"
+
 
 students_array = []
 marks_array = []
@@ -32,24 +34,32 @@ tests.each do |test|
   tests_array << {:id => test[0], :course_id => test[1], :weight => test[2]}
 end
 
+def find_student_average_one_course(student_id, courses_array, marks_array, tests_array)
 
+end
 
+myhash = {
+  :students => students_array,
+  :marks => marks_array,
+  :courses => courses_array,
+  :tests => tests_array
+}
 
-
-p students_array
-puts '---------'
-p marks_array
-puts '---------'
-p courses_array
-puts '---------'
-p tests_array
+p myhash
+# p students_array
+# puts '---------'
+# p marks_array
+# puts '---------'
+# p courses_array
+# puts '---------'
+# p tests_array
 
 students_array.each do |student|
-
   print "student Id: #{student[:id]}, name: #{student[:name]}\n"
-  print "total Average: \n"
+  print "total Average: #{total_average} \n"
 
   courses_array.each do |course|
+    student_marks = marks_array.map
     print "Course: #{course[:name]}, Teacher: #{course[:teacher]}\n"
   end
   puts "--------"
