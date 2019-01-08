@@ -34,33 +34,50 @@ tests.each do |test|
   tests_array << {:id => test[0], :course_id => test[1], :weight => test[2]}
 end
 
-def find_student_average_one_course(student_id, courses_array, marks_array, tests_array)
 
-end
 
-myhash = {
-  :students => students_array,
-  :marks => marks_array,
-  :courses => courses_array,
-  :tests => tests_array
-}
-
-p myhash
+# myhash = {
+#   :students => students_array,
+#   :marks => marks_array,
+#   :courses => courses_array,
+#   :tests => tests_array
+# }
+# p myhash
+#
 # p students_array
 # puts '---------'
 # p marks_array
-# puts '---------'
-# p courses_array
+# # puts '---------'
+# # p courses_array
 # puts '---------'
 # p tests_array
 
-students_array.each do |student|
-  print "student Id: #{student[:id]}, name: #{student[:name]}\n"
-  print "total Average: #{total_average} \n"
-
-  courses_array.each do |course|
-    student_marks = marks_array.map
-    print "Course: #{course[:name]}, Teacher: #{course[:teacher]}\n"
+def all_student_mark(student_id,marks_array, tests_array)
+  total_weight = 0
+  total_average = 0
+  student_marks = []
+  marks_array.each do |mark|
+    tests_array.each do |test|
+      if test[:id] == mark[:test_id] && mark[:student_id] == student_id.to_s
+          total_weight += test[:weight].to_i
+          student_marks << mark[:mark].to_i * test[:weight].to_i
+      end
+    end
   end
-  puts "--------"
+  p total_average = student_marks.sum
+  return total_average.round(2)
 end
+
+p all_student_mark(1, marks_array, tests_array)
+
+# students_array.each do |student|
+#   total_average = 0
+#   print "student Id: #{student[:id]}, name: #{student[:name]}\n"
+#   print "total Average: #{total_average} \n"
+#
+#   courses_array.each do |course|
+#     student_marks = marks_array.map
+#     print "Course: #{course[:name]}, Teacher: #{course[:teacher]}\n"
+#   end
+#   puts "--------"
+# end
