@@ -9,12 +9,10 @@ courses_array = []
 tests_array = []
 
 
-
 students = CSV.read('students.csv')[1 .. -1]
 marks = CSV.read('marks.csv')[1 .. -1]
 courses = CSV.read('courses.csv')[1 .. -1]
 tests = CSV.read('tests.csv')[1 .. -1]
-
 
 
 students.each do |student|
@@ -36,22 +34,6 @@ end
 
 
 
-# myhash = {
-#   :students => students_array,
-#   :marks => marks_array,
-#   :courses => courses_array,
-#   :tests => tests_array
-# }
-# p myhash
-#
-# p students_array
-# puts '---------'
-# p marks_array
-# # puts '---------'
-# # p courses_array
-# puts '---------'
-# p tests_array
-
 def total_student_average(student_id,marks_array, tests_array)
   total_weight = 0
   total_average = 0
@@ -64,8 +46,10 @@ def total_student_average(student_id,marks_array, tests_array)
       end
     end
   end
-  total_average = (student_marks.sum / total_weight)
-  return total_average
+  p student_marks.sum
+  p total_weight
+  total_average = (student_marks.sum.to_f / total_weight.to_f)
+  return total_average.round(2)
 end
 
 def find_grade(course_id, student_id, marks_array, tests_array)
@@ -81,15 +65,13 @@ def find_grade(course_id, student_id, marks_array, tests_array)
     end
   end
   if total_weight != 0
-    grade = (student_marks.sum / total_weight)
-    return grade
+    grade = (student_marks.sum.to_f / total_weight.to_f)
+    return grade.round(2)
   else
-    return grade
+    return grade.round(2)
   end
 end
 
-
-# p total_student_marks(1, marks_array, tests_array)
 
 students_array.each do |student|
   total_average = total_student_average(student[:id], marks_array, tests_array)
