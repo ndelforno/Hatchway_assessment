@@ -52,7 +52,7 @@ end
 # puts '---------'
 # p tests_array
 
-def all_student_mark(student_id,marks_array, tests_array)
+def total_student_average(student_id,marks_array, tests_array)
   total_weight = 0
   total_average = 0
   student_marks = []
@@ -64,20 +64,42 @@ def all_student_mark(student_id,marks_array, tests_array)
       end
     end
   end
-  p total_average = student_marks.sum
-  return total_average.round(2)
+  total_average = (student_marks.sum / total_weight)
+  return total_average
 end
 
-p all_student_mark(1, marks_array, tests_array)
+def find_grade(course_id, student_id, marks_array, tests_array)
+  total_weight = 0
+  grade = 0
+  student_marks = []
+  marks_array.each do |mark|
+    tests_array.each do |test|
+      if test[:id] == mark[:test_id] && mark[:student_id] == student_id.to_s && test[:course_id] == course_id
+        total_weight += test[:weight].to_i
+        student_marks << mark[:mark].to_i * test[:weight].to_i
+      end
+    end
+  end
+  if total_weight != 0
+    grade = (student_marks.sum / total_weight)
+    return grade
+  else
+    return grade
+  end
+end
 
-# students_array.each do |student|
-#   total_average = 0
-#   print "student Id: #{student[:id]}, name: #{student[:name]}\n"
-#   print "total Average: #{total_average} \n"
-#
-#   courses_array.each do |course|
-#     student_marks = marks_array.map
-#     print "Course: #{course[:name]}, Teacher: #{course[:teacher]}\n"
-#   end
-#   puts "--------"
-# end
+
+# p total_student_marks(1, marks_array, tests_array)
+
+students_array.each do |student|
+  total_average = total_student_average(student[:id], marks_array, tests_array)
+  print "student Id: #{student[:id]}, name: #{student[:name]}\n"
+  print "total Average:     #{total_average} % \n"
+
+  courses_array.each do |course|
+    final_grade = find_grade(course[:id],student[:id], marks_array, tests_array)
+    print "          Course: #{course[:name]}, Teacher: #{course[:teacher]}\n"
+    print "          Final Grade: #{final_grade} %\n"
+  end
+  puts "--------"
+end
