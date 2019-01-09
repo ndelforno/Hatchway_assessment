@@ -8,12 +8,21 @@ marks_array = []
 courses_array = []
 tests_array = []
 
+puts "path of students file?"
+filename = gets.chomp
+students = CSV.read(filename)[1 .. -1]
 
-students = CSV.read('students.csv')[1 .. -1]
-marks = CSV.read('marks.csv')[1 .. -1]
-courses = CSV.read('courses.csv')[1 .. -1]
-tests = CSV.read('tests.csv')[1 .. -1]
+puts "Path of marks file?"
+filename = gets.chomp
+marks = CSV.read(filename)[1 .. -1]
 
+puts "Path of courses file?"
+filename = gets.chomp
+courses = CSV.read(filename)[1 .. -1]
+
+puts "Path of tests file?"
+filename = gets.chomp
+tests = CSV.read(filename)[1 .. -1]
 
 students.each do |student|
   students_array << {:id => student[0], :name => student[1]}
@@ -46,8 +55,6 @@ def total_student_average(student_id,marks_array, tests_array)
       end
     end
   end
-  p student_marks.sum
-  p total_weight
   total_average = (student_marks.sum.to_f / total_weight.to_f)
   return total_average.round(2)
 end
